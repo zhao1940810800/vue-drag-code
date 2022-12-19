@@ -2,8 +2,7 @@
   <div class="itxst">
     <div>
       <draggable
-        :group="{ name: 'site', pull: 'clone' }"
-        @clone="clone"
+        :group="site"
         :list="state.list"
         ghost-class="ghost"
         chosen-class="chosenClass"
@@ -11,6 +10,7 @@
         @start="onStart"
         @end="onEnd"
         style="height: 100%"
+        :move="false"
       >
         <template #item="{ element }">
           <div class="item">
@@ -24,6 +24,7 @@
 <script setup>
 import { ref, reactive } from "vue";
 import draggable from "vuedraggable";
+let site=ref('site')
 const state = reactive({
   //需要拖拽的数据，拖拽后数据的顺序也会变化
   list: [
@@ -36,13 +37,14 @@ const state = reactive({
 //拖拽开始的事件
 const onStart = () => {
   console.log("开始拖拽");
+  site.value='baidu'
 };
-const clone = (item) => {
-  // console.log(item, 111111);
-};
+
 //拖拽结束的事件
 const onEnd = () => {
   console.log("结束拖拽");
+  site.value='site'
+
 };
 </script>
 <style scoped>
